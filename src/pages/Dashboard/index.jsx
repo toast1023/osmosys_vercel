@@ -28,18 +28,26 @@ const Dashboard = () => {
       const resp = await response.json();
       setUser((prevUser) => ({
         ...prevUser,
-        username: resp.username,
-        discord_guilds: resp.discord_guilds
+        ...resp
       }));
       setSelectedGuild(resp.discord_guilds[0]);
+      console.log(resp);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    getUserDetails();
-  }, []);
+    if (!user.username || user.update) {
+      if (user.update) {
+        setUser(prevUser => {
+          const { update, ...rest } = prevUser;
+          return rest;
+        });
+      }
+      getUserDetails();
+    }
+  }, [user]);
 
   return (
   <div className="drawer md:drawer-open bg-base-300">
@@ -67,7 +75,7 @@ const Dashboard = () => {
       <div className='p-4 flex-1 md:rounded-tl-lg overflow-scroll bg-base-200'>
         <Routes>
           <Route path="/" element={<Home guild={selectedGuild}/>}/>
-          <Route path="settings" element={<Settings />} />
+          <Route path="settings" element={<Settings user={user} setUser={setUser}/>} />
         </Routes>
       </div>
     </div> 
