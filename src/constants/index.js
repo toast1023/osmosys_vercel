@@ -199,7 +199,8 @@ export const COLORS = new Map([
 ]);
 
 export const defaultDateRange = [
-  new Date().toLocaleDateString('en-CA'), 
+  // default by last 31 days to current date
+  new Date(new Date().setDate(new Date().getDate() - 31)).toLocaleDateString('en-CA'), 
   new Date().toLocaleDateString('en-CA')
 ];
 
