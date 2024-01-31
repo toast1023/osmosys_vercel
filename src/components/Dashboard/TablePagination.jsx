@@ -1,6 +1,10 @@
 import React from 'react'
 
 const TablePagination = ({totalPages, page, setPage, limit, setLimit}) => {
+  if (totalPages === 0) {
+    return (<></>)
+  }
+
   return (
     <div className="join">
       <button className="join-item btn btn-sm" onClick={() => setPage(page = Math.max(page - 1, 1))}>«</button>
