@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Logo from '../../assets/OsmosysAI_Logo_White.svg'
 import Home from './Home'
 import Settings from './Settings'
-import { Route, Routes, Link } from 'react-router-dom'
+import { Route, Routes, Link, useNavigate } from 'react-router-dom'
 import { getApiUrl, onClickBlur } from '../../constants'
 import useAuthTokens from '../../hooks/useAuthTokens';
 import DiscordServerSelect from '../../components/Dashboard/DiscordServerSelect';
 import AccountHeader from '../../components/Dashboard/AccountHeader'
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     username: '',
     discord_guilds: []
@@ -34,6 +35,7 @@ const Dashboard = () => {
       console.log(resp);
     } catch (error) {
       console.error(error);
+      navigate("/login")
     }
   };
 
@@ -49,8 +51,8 @@ const Dashboard = () => {
     }
   }, [user]);
 
-  return (
-  <div className="drawer md:drawer-open bg-base-300">
+  return (<>
+  {user.username && <div className="drawer md:drawer-open bg-base-300">
     <input id="nav-drawer" type="checkbox" className="drawer-toggle" /> 
     <div className="drawer-content flex flex-col h-screen">
       {/* Navbar */}
@@ -106,8 +108,8 @@ const Dashboard = () => {
         </div>
       </ul>
     </div>
-  </div>
-  )
+  </div>}
+  </>)
 }
 
 export default Dashboard
