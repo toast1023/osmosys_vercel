@@ -8,7 +8,7 @@ import {
 } from '@tanstack/react-table'
 import TablePagination from './TablePagination'
 import MessagesFilter from './MessagesFilter'
-import { defaultCategories, defaultDateRange } from '../../constants';
+import { defaultCategories, defaultDateRange, getApiUrl } from '../../constants';
 
 const component = ({guild}) => {
   const [data, setData] = useState(() => [])
@@ -20,7 +20,7 @@ const component = ({guild}) => {
 
   const getGuildMessages = async () => {
     try {
-      const url = new URL(`${import.meta.env.VITE_API_URL}/dashboard/guild/${guild.id}/messages`);
+      const url = new URL(`${getApiUrl}/dashboard/guild/${guild.id}/messages`);
       url.searchParams.append('start_date', dateRange[0]);
       url.searchParams.append('end_date', dateRange[1]);
       url.searchParams.append('count', false);

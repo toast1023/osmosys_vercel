@@ -4,8 +4,6 @@ import MessagesGraph from '../../components/Dashboard/MessagesGraph'
 import MessagesTable from '../../components/Dashboard/MessagesTable'
 
 const Home = ({guild}) => {
-  if (import.meta.env.VITE_API_URL == undefined)
-    return (<>HEY!!! you didn't set the api url for production!!!</>)
   return (
     <>
       <div className='w-full bg-gray-800 rounded-md px-4 py-2 mb-4 items-center flex space-x-2 text-xl'>

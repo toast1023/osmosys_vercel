@@ -3,7 +3,7 @@ import Logo from '../../assets/OsmosysAI_Logo_White.svg'
 import Home from './Home'
 import Settings from './Settings'
 import { Route, Routes, Link } from 'react-router-dom'
-import { onClickBlur } from '../../constants'
+import { getApiUrl, onClickBlur } from '../../constants'
 import useAuthTokens from '../../hooks/useAuthTokens';
 import DiscordServerSelect from '../../components/Dashboard/DiscordServerSelect';
 import AccountHeader from '../../components/Dashboard/AccountHeader'
@@ -17,7 +17,7 @@ const Dashboard = () => {
   const { accessToken } = useAuthTokens();
   const getUserDetails = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/dashboard/user`, {
+      const response = await fetch(`${getApiUrl}/dashboard/user`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

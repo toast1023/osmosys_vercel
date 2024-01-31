@@ -1,6 +1,7 @@
 import { useLayoutEffect } from 'react';
 import useAuthTokens from './useAuthTokens';
 import { useNavigate } from 'react-router-dom';
+import { getApiUrl } from '../constants';
 
 const useFetchInterceptor = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const useFetchInterceptor = () => {
 
         // Check if we are making a request to our own backend
         const host = new URL(url).host;
-        if (host !== `${new URL(import.meta.env.VITE_API_URL).host}` && response.status !== 401) {
+        if (host !== `${new URL(getApiUrl).host}` && response.status !== 401) {
           return response;
         }
 
@@ -29,7 +30,7 @@ const useFetchInterceptor = () => {
         }
 
         // If token is bad/expired, use refresh token to get new tokens
-        const refreshResp = await originalFetch(`${import.meta.env.VITE_API_URL}/auth/refresh`, {
+        const refreshResp = await originalFetch(`${getApiUrl}/auth/refresh`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

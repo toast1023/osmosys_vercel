@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Logo from '../assets/OsmosysAI_Logo_White.svg'
 import { Link, useNavigate } from 'react-router-dom';
+import { getApiUrl } from '../constants';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -17,7 +18,7 @@ const Signup = () => {
         return;
       }
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
+      const response = await fetch(`${getApiUrl}/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

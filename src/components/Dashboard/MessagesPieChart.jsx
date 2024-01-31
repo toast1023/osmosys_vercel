@@ -8,7 +8,7 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts';
-import { COLORS, defaultCategories, defaultDateRange } from '../../constants';
+import { COLORS, defaultCategories, defaultDateRange, getApiUrl } from '../../constants';
 
 const component = ({guild}) => {
   const [data, setData] = useState(() => [])
@@ -19,7 +19,7 @@ const component = ({guild}) => {
   const getMessageData = async () => {
     try {
       setData([]);
-      const url = new URL(`${import.meta.env.VITE_API_URL}/dashboard/guild/${guild.id}/messages`);
+      const url = new URL(`${getApiUrl}/dashboard/guild/${guild.id}/messages`);
       url.searchParams.append('start_date', dateRange[0]);
       url.searchParams.append('end_date', dateRange[1]);
       url.searchParams.append('count', true);

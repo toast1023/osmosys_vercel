@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import useAuthTokens from '../hooks/useAuthTokens';
 import { Route, Routes, Navigate, useSearchParams } from 'react-router-dom'
+import { getApiUrl } from '../constants';
 
 const Redirect = () => {
   return (
@@ -22,7 +23,7 @@ const Discord = () => {
     }
 
     try {
-      const url = new URL(`${import.meta.env.VITE_API_URL}/auth/discord/link`);
+      const url = new URL(`${getApiUrl}/auth/discord/link`);
       url.searchParams.append('code', code);
       const response = await fetch(url, {
         method: 'GET',

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAuthTokens from '../../../hooks/useAuthTokens';
+import { getApiUrl } from "../../../constants";
 
 const Connections = ({user, setUser}) => {
   const [oauthPopup, setOauthPopup] = useState(null);
@@ -10,7 +11,7 @@ const Connections = ({user, setUser}) => {
   const handleDiscordLink = async () => {
     let discordOauthUrl = '';
     try {
-      const url = new URL(`${import.meta.env.VITE_API_URL}/auth/discord/login`);
+      const url = new URL(`${getApiUrl}/auth/discord/login`);
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -44,7 +45,7 @@ const Connections = ({user, setUser}) => {
 
   const handleDiscordUnlink = async () => {
     try {
-      const url = new URL(`${import.meta.env.VITE_API_URL}/auth/discord/unlink`);
+      const url = new URL(`${getApiUrl}/auth/discord/unlink`);
       url.searchParams.append('id', selectedAccount.id);
       const response = await fetch(url, {
         method: 'DELETE',

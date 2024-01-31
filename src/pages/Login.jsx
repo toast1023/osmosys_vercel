@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Logo from '../assets/OsmosysAI_Logo_White.svg'
 import useAuthTokens from '../hooks/useAuthTokens';
 import { Link, useNavigate } from 'react-router-dom';
+import { getApiUrl } from '../constants';
 
 const Login = () => {
   const { updateTokens, isExpired } = useAuthTokens();
@@ -13,7 +14,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
+      const response = await fetch(`${getApiUrl}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

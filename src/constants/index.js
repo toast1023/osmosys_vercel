@@ -216,3 +216,7 @@ export const defaultCategories = new Map([
   ['Violence', 512],
   ['Violence (Graphic)', 1024],
 ]);
+
+export const getApiUrl = (() => {
+  return import.meta.env.VITE_API_URL ?? 'https://api.osmosys.ai'
+})();
