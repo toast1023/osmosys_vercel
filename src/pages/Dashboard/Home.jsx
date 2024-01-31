@@ -1,9 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import MessagesPieChart from '../../components/Dashboard/MessagesPieChart'
 import MessagesGraph from '../../components/Dashboard/MessagesGraph'
 import MessagesTable from '../../components/Dashboard/MessagesTable'
 
 const Home = ({guild}) => {
+  if (!guild) {
+    return (<>
+      <div className="min-h-full flex flex-col items-center justify-center text-gray-400 space-y-4">
+        <svg className="fill-gray-400 stroke-gray-400 h-36" width="100%" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+          <path d="M48.2846 35.1737a3 3 0 1 1-3-3 3.0011 3.0011 0 0 1 3 3Z"/>
+          <path d="M30.2846 35.1737a3 3 0 1 1-3-3 3.0011 3.0011 0 0 1 3 3Z"/>
+          <path fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M25.4512 56.2934a22.9635 22.9635 0 1 0-11.3767-14.299"/>
+          <path fill="none" strokeMiterlimit="10" strokeWidth="2" d="M22.9511 52.9953a5.0262 5.0262 0 0 0 1.7615-3.45c.3532-4.4362-3.5025-9.0145-3.6667-9.2071a.9522.9522 0 0 0-1.3428-.1068c-.1929.1645-4.7241 4.0753-5.0783 8.5123a5.0608 5.0608 0 0 0 8.3267 4.2513Z"/>
+          <path fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M42.7856 46a12.4489 12.4489 0 0 0-6.8422-1.8532A10.3886 10.3886 0 0 0 29.7856 46"/>
+          <path fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M51.4223 26.2978a7.4028 7.4028 0 0 1-5.3048-.3243 7.4 7.4 0 0 1-4.11-3.4111"/>
+          <path fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21.1854 26.2871a8.44 8.44 0 0 0 9.413-3.7176"/>
+        </svg>
+        <span>Could not find any moderated servers.</span>
+        <span>
+          <Link className="underline hover:decoration-dotted hover:text-white" to="/dashboard/settings?page=Connections">
+          Link your Discord account
+          </Link> and <a className="underline hover:decoration-dotted hover:text-white" href="https://discord.com/oauth2/authorize?client_id=1152436728125206628&permissions=21983791152192&scope=bot" target="_blank">
+          add the bot 
+          </a> to your server to get started!
+        </span>
+      </div>
+    </>)
+  }
+
   return (
     <>
       <div className='w-full bg-gray-800 rounded-md px-4 py-2 mb-4 items-center flex space-x-2 text-xl'>

@@ -98,7 +98,7 @@ const Connections = ({user, setUser}) => {
             Link multiple Discord accounts to manage all your servers in one place!
           </span>
           <div className="p-4 flex-wrap flex">
-            {user.discord_accounts.map((account, idx) => (
+            {user.discord_accounts.map((account, idx) => (account.username !== null && (
               <div key={idx} className="bg-gray-700 rounded p-4 m-2 items-center justify-center flex flex-col space-y-2">
                 <div className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                   <img className="absolute w-12 h-12" 
@@ -121,7 +121,7 @@ const Connections = ({user, setUser}) => {
                   </button>
                 </div>
               </div>
-            ))}
+            )))}
             <button className="rounded p-4 m-2 items-center justify-center flex flex-col space-y-2 btn btn-outline h-36"
               onClick={handleDiscordLink}>
               <div className="relative w-10 h-10">

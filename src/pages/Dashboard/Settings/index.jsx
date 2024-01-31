@@ -1,9 +1,11 @@
 import Account from "./Account";
 import Connections from "./Connections";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom'
 
 const Settings = ({user, setUser}) => {
-  const [page, setPage] = useState("Account");
+  const [params, _] = useSearchParams();
+  const [page, setPage] = useState(params.get("page") ?? "Account");
 
   return (
     <div className="flex flex-col h-full">
