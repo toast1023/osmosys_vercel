@@ -35,7 +35,6 @@ const Dashboard = () => {
       console.log(resp);
     } catch (error) {
       console.error(error);
-      navigate("/login")
     }
   };
 
