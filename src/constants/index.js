@@ -199,8 +199,8 @@ export const COLORS = new Map([
 ]);
 
 export const defaultDateRange = [
-  new Date('2023-10-21').toLocaleDateString('en-CA'), 
-  new Date('2023-10-27').toLocaleDateString('en-CA')
+  new Date().toLocaleDateString('en-CA'), 
+  new Date().toLocaleDateString('en-CA')
 ];
 
 export const defaultCategories = new Map([

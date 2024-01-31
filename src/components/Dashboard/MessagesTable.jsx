@@ -156,7 +156,7 @@ const component = ({guild}) => {
       </tbody>
       <tfoot className='border-t border-gray-400'>
         <div className='px-4 pt-4 whitespace-nowrap'>
-          Showing {(page-1) * (data?.length ?? 0) + 1} to {(page-1) * (data?.length ?? 0) + (data?.length ?? 0)} of {data[0]?.total_count ?? 0} messages
+          Showing {(page-1) * (data?.length ?? 0) + ((data?.length ?? 0) === 0 ? 0 : 1)} to {(page-1) * (data?.length ?? 0) + (data?.length ?? 0)} of {data[0]?.total_count ?? 0} messages
         </div>
       </tfoot>
     </table>

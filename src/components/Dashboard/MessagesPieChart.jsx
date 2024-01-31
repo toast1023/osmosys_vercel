@@ -18,7 +18,7 @@ const component = ({guild}) => {
 
   const getMessageData = async () => {
     try {
-      setData([]);
+      setData(null);
       const url = new URL(`${getApiUrl}/dashboard/guild/${guild.id}/messages`);
       url.searchParams.append('start_date', dateRange[0]);
       url.searchParams.append('end_date', dateRange[1]);
@@ -82,9 +82,9 @@ const component = ({guild}) => {
         <MessagesFilter {...{ categories, setCategories, dateRange, setDateRange }}/>
       </div>
     </div>
-    <div className='flex h-full flex-grow p-4'>
+    <div className='flex flex-grow p-4' style={{height: '250px'}}>
       <div className='hidden xl:inline-block overflow-hidden whitespace-nowrap'>
-        {data.map((entry, index) => (
+        {data && data.map((entry, index) => (
           <div key={`legend-${index}`} className='flex items-center whitespace-nowrap'>
             <div className='w-4 h-3 mr-2 border border-white' style={{backgroundColor: COLORS.get(entry.name)}}></div>
             <span>{entry.name}</span>
@@ -92,25 +92,30 @@ const component = ({guild}) => {
         ))}
       </div>
       <div className='flex-grow'>
-        {data.length == 0 ? (
-        <div className='w-full flex justify-center items-center' style={{height: '250px'}}>
+        {data === null ? (
+        <div className='w-full h-full flex justify-center items-center'>
           <span className="loading loading-spinner loading-lg"></span>
         </div>
         ) : ( /* lol, funny recharts hack to fix responsiveness (width=99%) */
-        <ResponsiveContainer width="99%" height={250}> 
-          <PieChart>
-            <Pie
-              data={data}
-              outerRadius={120}
-              dataKey="value"
-            >
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS.get(entry.name)} />
-              ))}
-            </Pie>
-          </PieChart>
-        </ResponsiveContainer>
-        )}
+        data.length > 0 ? (
+          <ResponsiveContainer width="99%" height={250}> 
+            <PieChart>
+              <Pie
+                data={data}
+                outerRadius={120}
+                dataKey="value"
+              >
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS.get(entry.name)} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+        ) : (
+          <div className="w-full h-full flex justify-center items-center">
+            No data found.
+          </div>
+        ))}
       </div>
     </div>
     </>)
