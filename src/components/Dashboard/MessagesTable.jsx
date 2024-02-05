@@ -146,7 +146,7 @@ const component = ({guild}) => {
           <tr key={row.id}>
             {row.getVisibleCells().map(cell => (
               <td key={cell.id} className={`px-6 py-4 ` +
-                `${cell.column.id === 'message' ? "text-ellipsis overflow-hidden whitespace-nowrap blur-sm" : ""}`
+                `${cell.column.id === 'message' ? "text-ellipsis overflow-hidden whitespace-nowrap" : ""}`
               }>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
