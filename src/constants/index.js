@@ -181,6 +181,7 @@ export const onClickBlur = () => {
   if (elem) {
     elem.checked = false;
   }
+  return true;
 };
 
 export const COLORS = new Map([
