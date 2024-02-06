@@ -23,7 +23,7 @@ const Home = ({guild}) => {
           Link your Discord account
           </Link> and <a className="underline hover:decoration-dotted hover:text-white" href="https://discord.com/oauth2/authorize?client_id=1152436728125206628&permissions=21983791152192&scope=bot" target="_blank">
           add the bot 
-          </a> to your server to !
+          </a> to your server to get started!
         </span>
       </div>
     </>)
