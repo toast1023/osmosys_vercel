@@ -86,7 +86,7 @@ const Dashboard = () => {
       <label htmlFor="nav-drawer" aria-label="close sidebar" className="drawer-overlay"></label> 
       <ul className="menu p-4 w-72 min-h-full bg-base-300 space-y-6">
         <img src={Logo} alt="Osmosys Logo" className="h-12 -mb-2"/>
-        <DiscordServerSelect guilds={user.discord_guilds}/>
+        <DiscordServerSelect guilds={user.discord_guilds} setSelectedGuild={setSelectedGuild}/>
         <div className=''>
           <li onClick={onClickBlur}>
             <Link to="">

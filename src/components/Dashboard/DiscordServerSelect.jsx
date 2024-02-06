@@ -1,6 +1,6 @@
 import { onClickBlur } from '../../constants'
 
-const DiscordServerSelect = ({ guilds }) => {
+const DiscordServerSelect = ({ guilds, setSelectedGuild }) => {
   if (!Array.isArray(guilds)) {
     guilds = [];
   }
@@ -23,8 +23,8 @@ const DiscordServerSelect = ({ guilds }) => {
       </div>
       <div className="collapse-content"> 
         <ul className="">
-          {guilds.map((guild) => (
-            <SelectOption key={guild.id} guild={guild} />
+          {guilds.map((guild, i) => (
+            <SelectOption key={guild.id} guild={guild} setSelectedGuild={() => {setSelectedGuild(i)}} />
           ))}
           <AddServerOption/>
         </ul>
@@ -33,9 +33,9 @@ const DiscordServerSelect = ({ guilds }) => {
   )
 };
 
-const SelectOption = ({guild}) => {
+const SelectOption = ({guild, setSelectedGuild}) => {
   return (
-    <li onClick={onClickBlur}>
+    <li onClick={() => {onClickBlur(); setSelectedGuild();}}>
       <a>
         {guild.icon ? (
           <img className="h-5 w-5 rounded-full" src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`}/>
