@@ -46,6 +46,7 @@ const Dashboard = () => {
           const { update, ...rest } = prevUser;
           return rest;
         });
+        setSelectedGuild(user.discord_guilds[0]);
       }
       getUserDetails();
     }

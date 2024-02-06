@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import { onClickBlur } from '../../constants'
 
 const DiscordServerSelect = ({ guilds, setSelectedGuild }) => {
+  const navigate = useNavigate();
+
   if (!Array.isArray(guilds)) {
     guilds = [];
   }
@@ -24,7 +27,8 @@ const DiscordServerSelect = ({ guilds, setSelectedGuild }) => {
       <div className="collapse-content"> 
         <ul className="">
           {guilds.map((guild, i) => (
-            <SelectOption key={guild.id} guild={guild} setSelectedGuild={() => {setSelectedGuild(i)}} />
+            <SelectOption setSelectedGuild={() => {setSelectedGuild(guild); navigate("/dashboard");}} 
+              key={guild.id} guild={guild}/>
           ))}
           <AddServerOption/>
         </ul>
