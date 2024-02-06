@@ -75,7 +75,7 @@ const Dashboard = () => {
         </div>
       </div>
       {/* Page content */}
-      <div className='p-4 flex-1 md:rounded-tl-lg overflow-scroll bg-base-200'>
+      <div className='p-4 flex-1 md:rounded-tl-lg overflow-auto bg-base-200'>
         <Routes>
           <Route path="/" element={<Home guild={selectedGuild}/>}/>
           <Route path="settings" element={<Settings user={user} setUser={setUser}/>} />

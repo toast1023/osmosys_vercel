@@ -7,7 +7,7 @@ import MessagesTable from '../../components/Dashboard/MessagesTable'
 const Home = ({guild}) => {
   if (!guild) {
     return (<>
-      <div className="min-h-full flex flex-col items-center justify-center text-gray-400 space-y-4 overflow-hidden">
+      <div className="min-h-full flex flex-col items-center justify-center text-gray-400 space-y-4">
         <svg className="fill-gray-400 stroke-gray-400 h-36" width="100%" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
           <path d="M48.2846 35.1737a3 3 0 1 1-3-3 3.0011 3.0011 0 0 1 3 3Z"/>
           <path d="M30.2846 35.1737a3 3 0 1 1-3-3 3.0011 3.0011 0 0 1 3 3Z"/>
