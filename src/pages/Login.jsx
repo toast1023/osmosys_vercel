@@ -71,7 +71,7 @@ const Login = () => {
     }
   }, [])
 
-  if (!isTokenExpired && alert.length === 0) {
+  if (!isTokenExpired && (alert && alert.msg.length === 0)) {
     return (<></>)
   }
 
