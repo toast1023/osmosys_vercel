@@ -35,7 +35,7 @@ const Signup = () => {
         return;
       }
 
-      navigate('/login');
+      navigate('/login?signup=success');
       console.log('User register successful');
     } catch (e) {
       console.error(e);

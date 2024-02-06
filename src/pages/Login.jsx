@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Logo from '../assets/OsmosysAI_Logo_White.svg'
 import useAuthTokens from '../hooks/useAuthTokens';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { getApiUrl } from '../constants';
 
 const Login = () => {
+  const [params, _] = useSearchParams();
   const { accessToken, updateTokens, isExpired } = useAuthTokens();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [alert, setAlert] = useState(
+    params.get("signup") === "success" ? {
+        type: "alert-success", 
+        msg: "Your account has been created, please sign-in."
+      } : {type: "alert-error", msg: ""});
   const isTokenExpired = isExpired();
   const navigate = useNavigate();
 
@@ -26,7 +31,7 @@ const Login = () => {
       });
 
       if (response.status != 200) {
-        setError('Invalid credentials. Please try again.');
+        setAlert({type: "alert-error", msg: "Invalid credentials. Please try again."});
         return;
       }
       
@@ -38,7 +43,7 @@ const Login = () => {
       console.log('Login successful');
     } catch (e) {
       console.error(e);
-      setError('Communication error with server.');
+      setAlert({type: "alert-error", msg: "Communication error with server."});
     }
   };
 
@@ -59,14 +64,14 @@ const Login = () => {
           }
         } catch (error) {
           console.error(error);
-          setError('Session expired. Please login again.');
+          setAlert({type: "alert-error", msg: "Session expired. Please login again."});
         }
       }
       ping();
     }
   }, [])
 
-  if (!isTokenExpired && error.length === 0) {
+  if (!isTokenExpired && alert.length === 0) {
     return (<></>)
   }
 
@@ -75,9 +80,9 @@ const Login = () => {
       {/* <div className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
         <img className="h-12 mr-2" src={Logo} alt="Osmosys Logo"/>
       </div> */}
-      {error && <div role="alert" className="alert alert-error m-8 w-full sm:max-w-md">
+      {(alert && alert.msg != "") && <div role="alert" className={`alert ${alert.type} m-8 w-full sm:max-w-md`}>
         <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          <span>{error}</span>
+          <span>{alert.msg}</span>
       </div>}
       <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
