@@ -62,6 +62,12 @@ const component = ({guild}) => {
       header: () => <span>Date</span>,
       footer: info => info.column.id,
     }),
+    columnHelper.accessor(row => row.channel_name, {
+      id: 'channel_name',
+      cell: info => <i>{info.getValue()}</i>,
+      header: () => <span>Channel</span>,
+      footer: info => info.column.id,
+    }),
     columnHelper.accessor(row => row.user_name, {
       id: 'user_name',
       cell: info => <i>{info.getValue()}</i>,
@@ -124,7 +130,8 @@ const component = ({guild}) => {
             {headerGroup.headers.map((header, index) => (
               <th id={header.column.id} key={header.id} scope="col" className={`px-6 py-3 border-b border-gray-400 ` +
                 `${header.column.id === 'message_time' ? "w-64" : ""}` +
-                `${header.column.id === 'user_name' ? "w-40" : ""}` +
+                `${header.column.id === 'channel_name' ? "w-44" : ""}` +
+                `${header.column.id === 'user_name' ? "w-44" : ""}` +
                 `${header.column.id === 'flagged' ? "w-64" : ""}` +
                 `${header.column.id === 'message' ? "w-auto" : ""}`
                 // ` ${index === 0 ? "rounded-tl-lg" : ""}` +
