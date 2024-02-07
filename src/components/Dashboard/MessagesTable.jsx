@@ -8,7 +8,7 @@ import {
 } from '@tanstack/react-table'
 import TablePagination from './TablePagination'
 import MessagesFilter from './MessagesFilter'
-import { defaultCategories, defaultDateRange, getApiUrl } from '../../constants';
+import { COLORS, defaultCategories, defaultDateRange, getApiUrl } from '../../constants';
 
 const component = ({guild}) => {
   const [data, setData] = useState(() => [])
@@ -129,10 +129,10 @@ const component = ({guild}) => {
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header, index) => (
               <th id={header.column.id} key={header.id} scope="col" className={`px-6 py-3 border-b border-gray-400 ` +
-                `${header.column.id === 'message_time' ? "w-64" : ""}` +
+                `${header.column.id === 'message_time' ? "w-60" : ""}` +
                 `${header.column.id === 'channel_name' ? "w-44" : ""}` +
                 `${header.column.id === 'user_name' ? "w-44" : ""}` +
-                `${header.column.id === 'flagged' ? "w-64" : ""}` +
+                `${header.column.id === 'flagged' ? "w-auto" : ""}` +
                 `${header.column.id === 'message' ? "w-auto" : ""}`
                 // ` ${index === 0 ? "rounded-tl-lg" : ""}` +
                 // `${index === headerGroup.headers.length - 1 ? "rounded-tr-lg" : ""}`
@@ -173,25 +173,14 @@ const component = ({guild}) => {
 };
 
 const checkAndAppendTypes = (threshold, data) => {
-  let resultString = '';
-
-  // Iterate over object properties
-  for (const key in data) {
-    if (data.hasOwnProperty(key)) {
-      // Check if the value is over the threshold
-      if (data[key] > threshold) {
-        // Append the type to the result string
-        resultString += key.split('_').join(' ').replace(/^\w/, c => c.toUpperCase()) + ', ';
-        // If you want only the first match, you can break the loop here
-        // break;
-      }
-    }
-  }
-
-  // Remove the trailing comma and space
-  resultString = resultString.replace(/, $/, '');
-
-  return resultString;
+  return (<div className='space-x-1.5'>
+    {Object.keys(data).map((key, i) => {
+      if (data[key] < threshold) return;
+      return (<div key={i} className='badge badge-outline' style={{borderColor: COLORS.get(key)}}>
+        {key.split('_').join(' ').replace(/^\w/, c => c.toUpperCase())}
+      </div>)
+    })}
+  </div>);
 };
 
 export default component
