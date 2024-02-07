@@ -38,8 +38,8 @@ const component = ({guild}) => {
         { name: 'Harassment', value: 0},
         { name: 'Harassment (Threatening)', value: 0},
         { name: 'Self Harm', value: 0 },
-        { name: 'Self Harm Intent', value: 0},
-        { name: 'Self Harm Instructions', value: 0},
+        { name: 'Self Harm (Intent)', value: 0},
+        { name: 'Self Harm (Instructions)', value: 0},
         { name: 'Sexual', value: 0},
         { name: 'Sexual (Minors)', value: 0},
         { name: 'Violence', value: 0}, 
@@ -47,17 +47,17 @@ const component = ({guild}) => {
       ];
 
       Object.keys(resp.data).forEach((e) => {
-        pie[0].value += resp.data[e].hate_count * (categories.get("Hate") ? 1 : 0);
-        pie[1].value += resp.data[e].hate_threatening_count * (categories.get("Hate (Threatening)") ? 1 : 0);
-        pie[2].value += resp.data[e].harassment_count * (categories.get("Harassment") ? 1 : 0);
-        pie[3].value += resp.data[e].harassment_threatening_count * (categories.get("Harassment (Threatening)") ? 1 : 0);
-        pie[4].value += resp.data[e].self_harm_count * (categories.get("Self Harm") ? 1 : 0);
-        pie[5].value += resp.data[e].self_harm_intent_count * (categories.get("Self Harm Intent") ? 1 : 0);
-        pie[6].value += resp.data[e].self_harm_instructions_count * (categories.get("Self Harm Instructions") ? 1 : 0);
-        pie[7].value += resp.data[e].sexual_count * (categories.get("Sexual") ? 1 : 0);
-        pie[8].value += resp.data[e].sexual_minors_count * (categories.get("Sexual (Minors)") ? 1 : 0);
-        pie[9].value += resp.data[e].violence_count * (categories.get("Violence") ? 1 : 0);
-        pie[10].value += resp.data[e].violence_graphic_count * (categories.get("Violence (Graphic)") ? 1 : 0);
+        pie[0].value += resp.data[e].hate_count * (categories.get(pie[0].name) ? 1 : 0);
+        pie[1].value += resp.data[e].hate_threatening_count * (categories.get(pie[1].name) ? 1 : 0);
+        pie[2].value += resp.data[e].harassment_count * (categories.get(pie[2].name) ? 1 : 0);
+        pie[3].value += resp.data[e].harassment_threatening_count * (categories.get(pie[3].name) ? 1 : 0);
+        pie[4].value += resp.data[e].self_harm_count * (categories.get(pie[4].name) ? 1 : 0);
+        pie[5].value += resp.data[e].self_harm_intent_count * (categories.get(pie[5].name) ? 1 : 0);
+        pie[6].value += resp.data[e].self_harm_instructions_count * (categories.get(pie[6].name) ? 1 : 0);
+        pie[7].value += resp.data[e].sexual_count * (categories.get(pie[7].name) ? 1 : 0);
+        pie[8].value += resp.data[e].sexual_minors_count * (categories.get(pie[8].name) ? 1 : 0);
+        pie[9].value += resp.data[e].violence_count * (categories.get(pie[9].name) ? 1 : 0);
+        pie[10].value += resp.data[e].violence_graphic_count * (categories.get(pie[10].name) ? 1 : 0);
       })
 
       // Filter out items with a value of 0
