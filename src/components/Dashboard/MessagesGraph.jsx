@@ -72,7 +72,7 @@ const component = ({guild}) => {
     <LineChart data={data} margin={{ top: 30, right: 30, left: 10, bottom: 0, }} >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name"/>
-      <YAxis/>
+      <YAxis allowDecimals={false}/>
       <Tooltip content={CustomTooltip}/>
       {/* <Legend /> */}
       {Array.from(categories.entries()).map((entry, index) => (
