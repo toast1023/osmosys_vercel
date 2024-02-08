@@ -14,7 +14,18 @@ const Dashboard = () => {
     username: '',
     discord_guilds: []
   });
-  const [selectedGuild, setSelectedGuild] = useState(null);
+  const [selectedGuild, _setSelectedGuild] = useState(null);
+  const setSelectedGuild = (value, guilds=[]) => {
+    if (value === null) {
+      const guild = guilds.find(guild => guild.id === localStorage.getItem('selectedGuild'))
+      if (guild) value = guild;
+      else value = guilds[0];
+    }
+    if (localStorage.getItem('selectedGuild') !== value.id) {
+      localStorage.setItem('selectedGuild', value.id)
+    }
+    _setSelectedGuild(value);
+  };
   const { accessToken } = useAuthTokens();
   const getUserDetails = async () => {
     try {
@@ -31,7 +42,7 @@ const Dashboard = () => {
         ...prevUser,
         ...resp
       }));
-      setSelectedGuild(resp.discord_guilds[0]);
+      setSelectedGuild(null, resp.discord_guilds);
       console.log(resp);
     } catch (error) {
       console.error(error);
@@ -46,7 +57,7 @@ const Dashboard = () => {
           const { update, ...rest } = prevUser;
           return rest;
         });
-        setSelectedGuild(user.discord_guilds[0]);
+        setSelectedGuild(null, user.discord_guilds);
       }
       getUserDetails();
     }
@@ -77,7 +88,7 @@ const Dashboard = () => {
       {/* Page content */}
       <div className='p-4 flex-1 md:rounded-tl-lg overflow-auto bg-base-200'>
         <Routes>
-          <Route path="/" element={<Home guild={selectedGuild}/>}/>
+          <Route path="/" element={<Home guild={selectedGuild} update={() => {setUser({...user, update: 'update'})}}/>}/>
           <Route path="settings" element={<Settings user={user} setUser={setUser}/>} />
         </Routes>
       </div>

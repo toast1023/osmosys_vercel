@@ -173,10 +173,10 @@ const component = ({guild}) => {
 };
 
 const checkAndAppendTypes = (threshold, data) => {
-  return (<div className='space-x-1.5'>
+  return (<div>
     {Object.keys(data).map((key, i) => {
       if (data[key] < threshold) return;
-      return (<div key={i} className='badge badge-outline whitespace-nowrap' style={{borderColor: COLORS.get(key)}}>
+      return (<div key={i} className='badge badge-outline whitespace-nowrap mr-1.5' style={{borderColor: COLORS.get(key)}}>
         {key.split('_').join(' ').replace(/^\w/, c => c.toUpperCase())}
       </div>)
     })}
