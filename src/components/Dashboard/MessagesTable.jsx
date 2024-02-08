@@ -176,7 +176,7 @@ const checkAndAppendTypes = (threshold, data) => {
   return (<div className='space-x-1.5'>
     {Object.keys(data).map((key, i) => {
       if (data[key] < threshold) return;
-      return (<div key={i} className='badge badge-outline' style={{borderColor: COLORS.get(key)}}>
+      return (<div key={i} className='badge badge-outline whitespace-nowrap' style={{borderColor: COLORS.get(key)}}>
         {key.split('_').join(' ').replace(/^\w/, c => c.toUpperCase())}
       </div>)
     })}

@@ -71,18 +71,33 @@ const component = ({guild}) => {
     <ResponsiveContainer width="99%" height={280}>
     <LineChart data={data} margin={{ top: 30, right: 30, left: 10, bottom: 0, }} >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip contentStyle={{backgroundColor: "black", borderRadius: "0.5rem"}}/>
+      <XAxis dataKey="name"/>
+      <YAxis/>
+      <Tooltip content={CustomTooltip}/>
       {/* <Legend /> */}
       {Array.from(categories.entries()).map((entry, index) => (
-        entry[1] ? (
         <Line key={`line-${index}`} type="monotone" dataKey={entry[0]} stroke={COLORS.get(entry[0])} activeDot={{ r: 8 }} dot={false} />
-        ) : null
       ))}
     </LineChart>
     </ResponsiveContainer>
   </>)
+};
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-black p-2 rounded border border-white">
+        <p>{label}</p>
+        {payload.map((category, i) => {
+          if (category.value === 0) return <></>
+          return (<p style={{color: COLORS.get(category.name)}}>{`${category.name} : ${category.value}`}</p>)
+        })}
+        
+      </div>
+    );
+  }
+
+  return null;
 };
 
 export default component
