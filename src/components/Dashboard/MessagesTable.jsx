@@ -132,7 +132,7 @@ const component = ({guild}) => {
                 `${header.column.id === 'message_time' ? "w-60" : ""}` +
                 `${header.column.id === 'channel_name' ? "w-44" : ""}` +
                 `${header.column.id === 'user_name' ? "w-44" : ""}` +
-                `${header.column.id === 'flagged' ? "w-auto" : ""}` +
+                `${header.column.id === 'flagged' ? "w-64" : ""}` +
                 `${header.column.id === 'message' ? "w-auto" : ""}`
                 // ` ${index === 0 ? "rounded-tl-lg" : ""}` +
                 // `${index === headerGroup.headers.length - 1 ? "rounded-tr-lg" : ""}`
