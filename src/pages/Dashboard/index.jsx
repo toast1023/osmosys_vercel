@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Logo from '../../assets/OsmosysAI_Logo_White.svg'
 import Home from './Home'
-import Settings from './Settings'
+import Settings from './AccountSettings'
 import { Route, Routes, Link, useNavigate } from 'react-router-dom'
 import { getApiUrl, onClickBlur } from '../../constants'
 import useAuthTokens from '../../hooks/useAuthTokens';
@@ -43,7 +43,6 @@ const Dashboard = () => {
         ...resp
       }));
       setSelectedGuild(null, resp.discord_guilds);
-      console.log(resp);
     } catch (error) {
       console.error(error);
       navigate("/login");

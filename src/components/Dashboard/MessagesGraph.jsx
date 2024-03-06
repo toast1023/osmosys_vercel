@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import MessagesFilter from './MessagesFilter'
 import useAuthTokens from '../../hooks/useAuthTokens';
 import { 
@@ -89,8 +89,8 @@ const CustomTooltip = ({ active, payload, label }) => {
       <div className="bg-black p-2 rounded border border-white">
         <p>{label}</p>
         {payload.map((category, i) => {
-          if (category.value === 0) return <></>
-          return (<p style={{color: COLORS.get(category.name)}}>{`${category.name} : ${category.value}`}</p>)
+          if (category.value === 0) return <React.Fragment key={i}></React.Fragment>
+          return (<p key={i} style={{color: COLORS.get(category.name)}}>{`${category.name} : ${category.value}`}</p>)
         })}
         
       </div>

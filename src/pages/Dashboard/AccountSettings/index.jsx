@@ -3,7 +3,7 @@ import Connections from "./Connections";
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom'
 
-const Settings = ({user, setUser}) => {
+const AccountSettings = ({user, setUser}) => {
   const [params, _] = useSearchParams();
   const [page, setPage] = useState(params.get("page") ?? "Account");
 
@@ -49,4 +49,4 @@ const Settings = ({user, setUser}) => {
   )
 };
 
-export default Settings
+export default AccountSettings

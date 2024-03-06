@@ -10,7 +10,7 @@ import TablePagination from './TablePagination'
 import MessagesFilter from './MessagesFilter'
 import { COLORS, defaultCategories, defaultDateRange, getApiUrl } from '../../constants';
 
-const component = ({guild}) => {
+const component = ({guild, thresholds}) => {
   const [data, setData] = useState(() => [])
   const [categories, setCategories] = useState(defaultCategories);
   const [dateRange, setDateRange] = useState(defaultDateRange);
@@ -90,7 +90,7 @@ const component = ({guild}) => {
           "Violence": (categories.get("Violence") !== false ? info.row.original.violence : 0),
           "Violence (Graphic)": (categories.get("Violence (Graphic)") !== false ? info.row.original.violence_graphic : 0),
         }
-        return checkAndAppendTypes(0.4, data)
+        return checkAndAppendTypes(data, thresholds)
       },
       footer: info => info.column.id,
     }),
@@ -162,9 +162,11 @@ const component = ({guild}) => {
         ))}
       </tbody>
       <tfoot className='border-t border-gray-400'>
-        <div className='px-4 pt-4 whitespace-nowrap'>
-          Showing {(page-1) * (data?.length ?? 0) + ((data?.length ?? 0) === 0 ? 0 : 1)} to {(page-1) * (data?.length ?? 0) + (data?.length ?? 0)} of {data[0]?.total_count ?? 0} messages
-        </div>
+        <tr>
+          <td className='px-4 pt-4 whitespace-nowrap'>
+            Showing {(page-1) * (data?.length ?? 0) + ((data?.length ?? 0) === 0 ? 0 : 1)} to {(page-1) * (data?.length ?? 0) + (data?.length ?? 0)} of {data[0]?.total_count ?? 0} messages
+          </td>
+        </tr>
       </tfoot>
     </table>
     <div className="h-4" />
@@ -172,12 +174,16 @@ const component = ({guild}) => {
   </>)
 };
 
-const checkAndAppendTypes = (threshold, data) => {
+const checkAndAppendTypes = (data, thresholds) => {
   return (<div>
     {Object.keys(data).map((key, i) => {
-      if (data[key] < threshold) return;
-      return (<div key={i} className='badge badge-outline whitespace-nowrap mr-1.5' style={{borderColor: COLORS.get(key)}}>
-        {key.split('_').join(' ').replace(/^\w/, c => c.toUpperCase())}
+      if (data[key] <= thresholds.get(key) / 100) {
+        return;
+      }
+      return (<div className="tooltip" key={i} data-tip={`Confidence score: ${parseFloat((data[key] * 100).toFixed(2))}%`}>
+        <div className='badge badge-outline whitespace-nowrap mr-1.5 cursor-pointer' style={{borderColor: COLORS.get(key)}}>
+          {key.split('_').join(' ').replace(/^\w/, c => c.toUpperCase())}
+        </div>
       </div>)
     })}
   </div>);

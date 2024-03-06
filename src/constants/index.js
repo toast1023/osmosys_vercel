@@ -219,6 +219,10 @@ export const defaultCategories = new Map([
   ['Violence (Graphic)', 1024],
 ]);
 
+export const friendlyCategoryToNot = (str) => {
+  return str.toLowerCase().replace(/[()]/g, '').replace(/[ ]/g, '_');
+};
+
 export const getApiUrl = (() => {
   return import.meta.env.VITE_API_URL ?? 'https://api.osmosys.ai'
 })();
