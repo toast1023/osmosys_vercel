@@ -144,7 +144,7 @@ export const CreateAction = ({actions, setActions, editAction, setEditAction}) =
         friendlyAction: 
           punish.charAt(0).toUpperCase() + punish.slice(1) 
             + (punish !== "none" ? " user" : "")
-            + (punish === "timeout" ? " for " + duration : ""),
+            + (punish === "timeout" ? " for " + formatTime(parseInt(duration)) : ""),
         friendlyCondition: 
           "If " + category + " " 
             + operators.get(operator).replace(/\([^)]*\)/g, '') 
@@ -323,3 +323,19 @@ const operators = new Map([
   ['equal', '= (Equal)'],
   ['not_equal', '!= (Not Equal)'],
 ]);
+
+function formatTime(minutes) {
+  if (minutes === 1) {
+      return "60 seconds";
+  } else if (minutes >= 5 && minutes < 60) {
+      return minutes + " minutes";
+  } else if (minutes === 60) {
+      return "1 hour";
+  } else if (minutes === 1440) {
+      return "1 day";
+  } else if (minutes === 10080) {
+      return "1 week";
+  } else {
+      return "Unknown";
+  }
+}
