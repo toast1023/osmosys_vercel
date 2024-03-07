@@ -153,7 +153,7 @@ const component = ({guild, thresholds}) => {
           <tr key={row.id}>
             {row.getVisibleCells().map(cell => (
               <td key={cell.id} className={`px-6 py-4 ` +
-                `${cell.column.id === 'message' ? "text-ellipsis overflow-hidden whitespace-nowrap" : ""}`
+                `${cell.column.id === 'message' ? "text-ellipsis overflow-hidden whitespace-nowrap blur-sm" : ""}`
               }>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
