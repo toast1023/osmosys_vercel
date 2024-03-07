@@ -16,12 +16,12 @@ const Dashboard = () => {
   });
   const [selectedGuild, _setSelectedGuild] = useState(null);
   const setSelectedGuild = (value, guilds=[]) => {
-    if (value === null) {
+    if (!value) {
       const guild = guilds.find(guild => guild.id === localStorage.getItem('selectedGuild'))
       if (guild) value = guild;
       else value = guilds[0];
     }
-    if (localStorage.getItem('selectedGuild') !== value.id) {
+    if (value && localStorage.getItem('selectedGuild') !== value.id) {
       localStorage.setItem('selectedGuild', value.id)
     }
     _setSelectedGuild(value);
